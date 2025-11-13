@@ -1,9 +1,9 @@
 import Card from "../components/Card";
 
-const Pruductlist = () => {
+const Productlist = () => {
     return ( 
         <Card />
      );
 }
  
-export default Pruductlist;
+export default Productlist;
