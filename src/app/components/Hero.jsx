@@ -11,7 +11,7 @@ const Hero = () => {
       />
       <div className="absolute inset-0 flex flex-col items-start justify-end p-6 mx-24 mb-24 ">
         <h1 className="text-white mb-6 text-7xl ">
-            Lorem Ipsum
+            Lorem Ipsum 
         </h1>
         <Link href="/products">
         <button className="bg-white p-2 pr-6 pl-6">
