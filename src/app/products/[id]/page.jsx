@@ -1,25 +1,32 @@
 "use client";
 // import Thumbnail from ".../components/Thumbnail"; // kommenteret ud, da funktionen er defineret i bunden
+import { useParams } from "next/navigation"; // tilføjet useParams til at hente id fra URL
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
 
-export default function ProductPage({ params }) {
-  const { id } = params;
+export default function ProductPage() {
+  const { id } = useParams(); // Hent produktdata baseret på id fra URL
 
   const [product, setProduct] = useState(null);
   const [activeImage, setActiveImage] = useState(null);
 
   useEffect(() => {
-    fetch(`https://dummyjson.com/products/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProduct(data);
-        setActiveImage(data.thumbnail); // sat ind i .then, så den kører med når du loader produktet
-      });
+      if (!id) return; // safety check
+
+    async function loadProduct() {
+      const res = await fetch(`https://dummyjson.com/products/${id}`);
+      const data = await res.json();
+      setProduct(data);
+      setActiveImage(data.thumbnail);
+    }
+
+    loadProduct();
   }, [id]);
 
-  // if (!product) return <p>Loading…</p>; // Chat tilføjer det her, ved ikke om du vil have den med?
+  // Hele din fetch er flyttet ind i useEffect ovenfor med async funktion
+
+  if (!product) return <p>Loading…</p>; // Chat tilføjer det her, ved ikke om du vil have den med?
 
   return (
     <section>
