@@ -1,42 +1,62 @@
 "use client";
-
+import Thumbnail from ".../components/Thumbnail";
 import { useEffect, useState } from "react";
-
 import Image from "next/image";
 
 
 export default function ProductPage({params}) {
     const {id} = params;
   const [product, setProduct] = useState(null);
+  const [activeImage, setActiveImage] = useState(null);
 
   useEffect(() =>{
     fetch(`https://dummyjson.com/products/${id}`)
     .then((res) => res.json())
-    .then((data) => setProduct(data))
-    .catch((error) => console.error("Error fetching product:", error));
-}, [id]);
+    .then((data) => setProduct(data));
+    setActiveImage(data.thumbnail);
+  });
 
 
   return (
     <section >
-      {products.map((product) => (
-        <div
-          key={product.id}
-          //className={`${
-           // product.category === "beauty" ? "bg-pink-100" : "bg-gray-100"}`}
-        >
-          <Image
-            src={product.image}
+     <section>
+        <figure>
+            <Image
+            src={ActiveImage}
             alt={product.title}
-            width={200}
-            height={200}
-            className="rounded-lg"
-          />
-          <h2 className="text-lg font-semibold mt-2">{product.title}</h2>
-          <p className="text-sm text-gray-600">{product.category}</p>
-          <p className="font-bold mt-1">{product.price} DKK</p>
+            width={400}
+            height={400}
+            />
+        </figure>
+
+        <div>
+            <h1>{product.title}</h1>
+            <p>{product.descriptioin}</p>
+            <p>DKK {product.price},-</p>
+            <p>Category: {product.category}</p>
         </div>
-      ))}
+     </section>
+
+     <div>
+        {product.images.map((imgSrc, index) =>(
+        <Thumbnail
+        key={index}
+            imgsrc={imgSrc}
+            setActiveImage={setActiveImage}
+            activeImage={activeImage}
+          />
+        ))}
+     </div>
+
     </section>
   );
 }
+
+function Thumbnail({ imgsrc, setActiveImage, activeImage }) {
+    return (
+      <div onClick={() => setActiveImage(imgsrc)}>
+        <Image src={imgsrc} alt="" width={100} height={100} />
+      </div>
+    );
+  }
+  
