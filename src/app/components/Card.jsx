@@ -3,8 +3,19 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Card({ product }) {
+    const status = product.availabilityStatus;
+    const isLowStock = status === "Low Stock";
+
+
   return (
-    <div className="shadow-md w-60 p-8 m-8 rounded-xl">
+    <div className="relative shadow-md w-60 p-8 m-8 rounded-xl">
+        
+    {isLowStock && (
+        <span className="absolute right-4 top-4 text-xs font-semibold text-red-500">
+          Low stock
+        </span>
+      )}
+
       <Link href={`/products/${product.id}`}>
         <Image
           src={product.thumbnail}
