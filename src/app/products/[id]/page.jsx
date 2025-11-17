@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation"; // tilføjet useParams til at hente id fra URL
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Kurv from "../../components/Kurv";
 
 
 export default function ProductPage() {
@@ -29,8 +30,9 @@ export default function ProductPage() {
   if (!product) return <p>Loading…</p>; // Chat tilføjer det her, ved ikke om du vil have den med?
 
   return (
-    <section>
-      <section>
+    <section className="flex justify-between">
+        <div className="product-details w-300"> 
+      <section >
         <figure>
           <Image
             src={activeImage}
@@ -58,7 +60,13 @@ export default function ProductPage() {
           />
         ))}
       </div>
+      </div>
+
+      <aside className="m-8">
+        <Kurv />
+      </aside>
     </section>
+    
   );
 }
 

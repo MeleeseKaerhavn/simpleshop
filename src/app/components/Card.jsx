@@ -1,10 +1,34 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function Card({ product }) {
     const status = product.availabilityStatus;
     const isLowStock = status === "Low Stock";
+
+    //function til at tilføje til kurv i local sstorage
+    const addToCart = () => {
+      const saved = localStorage.getItem("cartItems");
+      const cart = saved ? JSON.parse(saved) : [] ;
+      const exists = cart.find((item) => item.id === product.id);
+
+      if (!exists) {
+        cart.push({...product, quantity: 1});
+      } else {
+        const updated = cart.map((item) => 
+        item.id === product.id
+        ? { ...item, quantity: item.quantity + 1}
+        : item 
+      );
+      cart.splice(0, cart.length, ...updated);//overskriv cart
+      }
+
+      localStorage.setItem("cartItems", JSON.stringify(cart));
+
+      //trigger event for kurv-componentet
+      window.dispatchEvent(new Event ("cartUpdated"));
+    };
 
 
   return (
@@ -25,14 +49,19 @@ export default function Card({ product }) {
         />
       </Link>
 
+      <Link href={`/products/${product.id}`}>
       <h2 className="font-bold mt-3">{product.title}</h2>
       <p className=" mb-3">{product.price} DKK</p>
-
-      <Link href={`/products/${product.id}`}>
-        <button className="bg-white p-2 pr-6 pl-6 border border-black hover:bg-black hover:text-white transition">
+      </Link>
+      
+        <button  
+        onClick={addToCart}
+        className="bg-white p-2 pr-6 pl-6 border border-black hover:bg-black hover:text-white transition"
+        >
           Læg i kurv
         </button>
-      </Link>
+        
+      
     </div>
   );
 }
