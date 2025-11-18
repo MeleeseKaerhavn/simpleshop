@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import PayButton from "./PayButton";
+import Link from "next/link";
 
 export default function Kurv(){
   const [cartItems, setCartItems] = useState ([]);
@@ -92,6 +94,11 @@ export default function Kurv(){
             </li>
         ))}
       </ul>
+      <div className="mt-4">
+        <Link href="/payment">
+      <PayButton>Gå til betaling</PayButton>
+        </Link>
+      </div>
 
       </div>
   );
