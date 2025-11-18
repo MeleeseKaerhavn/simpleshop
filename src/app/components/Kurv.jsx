@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import PayButton from "./PayButton";
 import Link from "next/link";
 
-export default function Kurv(){
+export default function Kurv({ paymentMode = false }){
   const [cartItems, setCartItems] = useState ([]);
 
   //hent kurv fra local storage ved load
@@ -58,7 +58,11 @@ export default function Kurv(){
 
 
   return(
-    <div className="border p-4 rounded shadow-md w-80">
+    <div
+  className={`p-4 rounded shadow-md 
+    ${paymentMode ? "w-full bg-white shadow-lg rounded-xl" : "w-80 border"}
+  `}
+>
       <h2 className="font-bold mb-4">Kurv</h2>
       {cartItems.length === 0 && <p>Kurv er tom</p>}
 
@@ -94,13 +98,14 @@ export default function Kurv(){
             </li>
         ))}
       </ul>
-      <div className="mt-4">
-        <Link href="/payment">
-      <PayButton>Gå til betaling</PayButton>
-        </Link>
-      </div>
-
-      </div>
+      {!paymentMode && (
+        <div className="mt-4">
+          <Link href="/payment">
+            <PayButton>Gå til betaling</PayButton>
+          </Link>
+        </div>
+      )}
+    </div>
   );
 }
 
