@@ -28,7 +28,7 @@ export default function ProductPage() {
 
   return (
     <main className="max-w-6xl mx-auto px-10 py-10 space-y-12">
-      {/* TILBAGE-LINK */}
+      
       <div>
         <Link
           href="/products"
@@ -38,12 +38,12 @@ export default function ProductPage() {
         </Link>
       </div>
 
-      {/* TOP: produkt + kurv */}
+ 
       <section className="flex flex-wrap gap-12 items-start">
-        {/* VENSTRE: billede + tekst + thumbnails */}
+        
         <div className="flex-1">
           <div className="flex gap-10 items-start">
-            {/* stort billede */}
+           
             <div>
               <figure className="w-[340px] h-[340px] border-4 rounded-xl p-4 flex items-center justify-center bg-white">
                 <Image
@@ -55,7 +55,7 @@ export default function ProductPage() {
                 />
               </figure>
 
-              {/* thumbnails */}
+              
               <div className="mt-4 flex gap-4">
                 {product.images.map((imgSrc, index) => (
                   <Thumbnail
@@ -68,7 +68,7 @@ export default function ProductPage() {
               </div>
             </div>
 
-            {/* tekst ved siden af billedet */}
+           
             <div className="space-y-3 mt-2">
               <h1 className="text-3xl font-bold text-black">
                 {product.title}
@@ -86,21 +86,19 @@ export default function ProductPage() {
           </div>
         </div>
 
-        {/* HØJRE: kurv */}
+       
         <aside className="w-72">
           <Kurv />
         </aside>
       </section>
 
-      {/* DIVIDER MED CIRKLER */}
       <div className="flex items-center gap-3">
         <span className="w-3 h-3 rounded-full border border-black" />
         <span className="flex-1 h-px bg-black" />
         <span className="w-3 h-3 rounded-full border border-black" />
       </div>
 
-      {/* REVIEWS */}
-    {/* REVIEWS */}
+   
 <section className="pb-10">
   <ReviewSection reviews={product.reviews} rating={product.rating} />
 </section>

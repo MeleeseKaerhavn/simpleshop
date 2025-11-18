@@ -2,7 +2,7 @@ import ReviewCard from "./Reviewcard";
 
 export default function ReviewSection({ reviews = [] }) {
 
-  // ⭐ Calculate the average score
+
   const average =
     reviews.length > 0
       ? reviews.reduce((total, r) => total + r.rating, 0) / reviews.length
