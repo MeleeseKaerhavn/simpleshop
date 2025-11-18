@@ -16,15 +16,15 @@ export default function ProductsPage() {
       .then((data) => setProducts(data.products || []));
   }, []);
 
-  //henter fra local storage
-  useEffect(() => {
-    const handler = () => {
-      const saved = localStorage.getItem("cartItems");
-      setCartItems(saved ? JSON.parse(saved) : []);
-    };
-    window.addEventListener("cartUpdated", handler);
-    return () => window.removeEventListener("cartUpdated", handler);
-  }, []);
+  // //henter fra local storage
+  // useEffect(() => {
+  //   const handler = () => {
+  //     const saved = localStorage.getItem("cartItems");
+  //     setCartItems(saved ? JSON.parse(saved) : []);
+  //   };
+  //   window.addEventListener("cartUpdated", handler);
+  //   return () => window.removeEventListener("cartUpdated", handler);
+  // }, []);
 
   // Filter products by category
   const filteredProducts = useMemo(() => {
