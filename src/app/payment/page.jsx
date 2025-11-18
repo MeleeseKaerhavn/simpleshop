@@ -1,5 +1,4 @@
 "use client";
-
 import useCartStore from "../store/cartStore"; 
 import PaymentProducts from "../components/PaymentProducts";
 import PayButton from "../components/PayButton";
@@ -31,11 +30,14 @@ export default function PaymentPage() {
           ))}
         </div>
 
+
         {/* Total */}
         <div className="mt-24 text-center">
+
           <p className="text-xl mb-6">
             I alt at betale: {total},-
           </p>
+
 
           <PayButton>Betal nu</PayButton>
         </div>
@@ -80,3 +82,4 @@ export default function PaymentPage() {
 //     </main>
 //   );
 // }
+

@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import useCartStore from "../store/cartStore";
 import PayButton from "./PayButton";
@@ -11,6 +10,7 @@ export default function Kurv() {
     removeFromCart,
     updateQuantity,
   } = useCartStore();
+
 
   return (
     <div className="border p-4 rounded shadow-md w-80">
@@ -51,6 +51,7 @@ export default function Kurv() {
           </li>
         ))}
       </ul>
+
 
       <div className="mt-4">
         <Link href="/payment">
